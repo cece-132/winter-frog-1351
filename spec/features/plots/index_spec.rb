@@ -66,16 +66,17 @@ RSpec.describe Plot do
           expect(page).to have_content(plant1.name)
           expect(page).to_not have_content(plant2.name)
 
-          pp = PlotPlant.where(plot_id: plot1.id).first
+          pp = PlotPlant.where(plant_id: plant1.id).first
           expect(pp.plot_id).to eq(plot1.id)
 
           expect(page).to have_button("Remove Plant")
 
           click_button "Remove Plant"
 
-          # pp2 = PlotPlant.where(plant_id: plant1.id).first
+          pp = PlotPlant.where(plant_id: plant1.id).first
+
           expect(current_path).to eq(plots_path)
-          expect(pp.plot_id).to eq(plot4.id)
+          expect(pp.plot_id).to eq(nil)
         end
       end
 

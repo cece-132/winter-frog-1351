@@ -1,0 +1,15 @@
+<%= @garden.name %>
+
+
+<% @garden.plots.each do |plot| %>
+  <% plot.plants.each do |plant| %>
+    <% if plant.days_to_harvest < 100 %>
+      <% @plants << plant.name %>
+    <% end %>
+  <% end %>
+<% end %>
+
+Plants less than 100 days to harvest
+<% @plants.uniq.each do |plant_name| %>
+  <p> <%= plant_name %> </p>
+<% end %>
