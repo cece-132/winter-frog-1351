@@ -45,6 +45,7 @@ RSpec.describe Plot do
       plot1 = Plot.create!(number: 25, size: "Large", direction: "East", garden_id: garden.id)
       plot2 = Plot.create!(number: 35, size: "Small", direction: "South", garden_id: garden.id)
       plot3 = Plot.create!(number: 45, size: "Medium", direction: "South", garden_id: garden.id)
+      plot4 = Plot.create!(number: 0, size: "Removed", direction: "Removed", garden_id: garden.id)
 
       plant1 = Plant.create!(name: "Purple Beauty Sweet Bell Pepper", description: "Prefers rich, well draining soil.", days_to_harvest: 90)
       plant2 = Plant.create!(name: "Balloon Flower", description: "Great for the days you just want to float away", days_to_harvest: 45)
@@ -72,9 +73,9 @@ RSpec.describe Plot do
 
           click_button "Remove Plant"
 
-          pp2 = PlotPlant.where(plot_id: plot1.id).first
+          # pp2 = PlotPlant.where(plant_id: plant1.id).first
           expect(current_path).to eq(plots_path)
-          expect(pp2.plot_id).to eq(nil)
+          expect(pp.plot_id).to eq(plot4.id)
         end
       end
 
