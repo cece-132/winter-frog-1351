@@ -2,7 +2,10 @@
   <div class="plot-<%= plot.id %>">
      Plot: <%= plot.number %>
     <% plot.plants.each do |plant| %>
+    <div class="plant-<%= plant.id %>">
      Plant: <%= plant.name %>
+      <%= button_to "Remove Plant", plot_plant_path(plant), method: :patch, params: { plot_id: nil }%>
+     </div>
     <% end %>
     </div>
   <% end %>
