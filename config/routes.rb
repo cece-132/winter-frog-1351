@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :plots, only: [:index]
   resources :plot_plants, only: [:update]
 
-  resources :gardens do
+  resources :gardens, only: [:show] do
     resources :plots, only: [:index]
   end
 end
