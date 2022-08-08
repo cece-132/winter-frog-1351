@@ -23,6 +23,18 @@ RSpec.describe Plot do
       pp6 = PlotPlant.create!(plant_id: plant5.id, plot_id: plot1.id)
 
       visit plots_path
+
+      within(".plot-#{plot1.id}") do
+        expect(page).to have_content(plot1.number)
+        expect(page).to have_content(plant1.name)
+        expect(page).to have_content(plant5.name)
+
+        expect(page).to_not have_content(plot2.number)
+        expect(page).to_not have_content(plot3.number)
+        expect(page).to_not have_content(plant2.name)
+        expect(page).to_not have_content(plant3.name)
+        expect(page).to_not have_content(plant4.name)
+      end
     end
   end
 end
