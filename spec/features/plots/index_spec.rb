@@ -22,7 +22,7 @@ RSpec.describe Plot do
       pp5 = PlotPlant.create!(plant_id: plant4.id, plot_id: plot2.id)
       pp6 = PlotPlant.create!(plant_id: plant5.id, plot_id: plot1.id)
 
-      visit garden_plots_path(garden)
+      visit plots_path
 
       within(".plot-#{plot1.id}") do
         expect(page).to have_content(plot1.number)
@@ -53,13 +53,12 @@ RSpec.describe Plot do
       plant5 = Plant.create!(name: "Jerusalem artichoke", description: "Amazing dips have been made from this plant", days_to_harvest: 52)
 
       pp1 = PlotPlant.create!(plant_id: plant1.id, plot_id: plot1.id)
-      pp2 = PlotPlant.create!(plant_id: plant1.id, plot_id: plot2.id)
-      pp3 = PlotPlant.create!(plant_id: plant2.id, plot_id: plot3.id)
-      pp4 = PlotPlant.create!(plant_id: plant3.id, plot_id: plot3.id)
-      pp5 = PlotPlant.create!(plant_id: plant4.id, plot_id: plot2.id)
-      pp6 = PlotPlant.create!(plant_id: plant5.id, plot_id: plot1.id)
+      pp2 = PlotPlant.create!(plant_id: plant2.id, plot_id: plot2.id)
+      pp3 = PlotPlant.create!(plant_id: plant3.id, plot_id: plot3.id)
+      pp4 = PlotPlant.create!(plant_id: plant4.id, plot_id: plot3.id)
+      pp5 = PlotPlant.create!(plant_id: plant5.id, plot_id: plot2.id)
 
-      visit garden_plots_path(garden)
+      visit plots_path
 
       within(".plot-#{plot1.id}") do
         within(".plant-#{plant1.id}") do
@@ -72,6 +71,10 @@ RSpec.describe Plot do
           expect(page).to have_button("Remove Plant")
 
           click_button "Remove Plant"
+
+          pp2 = PlotPlant.where(plot_id: plot1.id).first
+          expect(current_path).to eq(plots_path)
+          expect(pp2.plot_id).to eq(nil)
         end
       end
 
